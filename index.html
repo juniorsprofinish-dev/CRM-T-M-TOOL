@@ -10,15 +10,12 @@
   <title>Junior's Pro Finish, LLC - Time & Materials Invoicing Tool</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <!-- Firebase App, Auth & Firestore SDKs (Compat v10 for Browser Apps) -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
-    tailwind.config = {
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
@@ -111,60 +108,6 @@
       background: #94a3b8;
     }
     
-    /* Liquid Glass & Modern Glassmorphism Styling */
-    .glass-canvas-bg {
-      background: radial-gradient(circle at 10% 20%, rgba(254, 243, 199, 0.45) 0%, transparent 40%),
-                  radial-gradient(circle at 90% 15%, rgba(209, 250, 229, 0.45) 0%, transparent 40%),
-                  radial-gradient(circle at 50% 80%, rgba(224, 242, 254, 0.45) 0%, transparent 50%),
-                  #f8fafc;
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 10px -6px rgba(15, 23, 42, 0.02);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .glass-card:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 20px 32px -8px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
-      border-color: rgba(255, 255, 255, 0.95);
-    }
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      box-shadow: 0 12px 32px 0 rgba(15, 23, 42, 0.05);
-    }
-    .glass-nav-header {
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    }
-    .glass-tab-pill {
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: all 0.2s ease;
-    }
-    .glass-pill-badge {
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    @keyframes floatOrb {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-12px) scale(1.04); }
-    }
-    .animate-float-slow {
-      animation: floatOrb 9s ease-in-out infinite;
-    }
-    .animate-float-reverse {
-      animation: floatOrb 12s ease-in-out infinite reverse;
-    }
-
     /* Badges */
     .badge-helper {
       background-color: #ffedd5;
@@ -218,20 +161,129 @@
     .touch-press:active {
       transform: scale(0.97);
     }
-  </style>
-</head>
-<body class="glass-canvas-bg text-slate-800 font-sans min-h-screen flex flex-col antialiased relative selection:bg-brand-orange selection:text-white">
+  
+    /* ==========================================================================
+       LIQUID GLASS (GLASSMORPHISM) MODERN PLAYFUL DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-bg-strong: rgba(255, 255, 255, 0.84);
+      --glass-border: rgba(255, 255, 255, 0.78);
+      --glass-shadow: 0 12px 36px -8px rgba(15, 23, 42, 0.08), 0 4px 16px -4px rgba(15, 23, 42, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+    }
 
-  <!-- Ambient Liquid Glass Glow Orbs (Subtle playful modern background mesh) -->
-  <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden="true">
-    <div class="absolute -top-32 -left-20 w-96 h-96 bg-gradient-to-br from-amber-400/25 via-orange-400/20 to-transparent rounded-full blur-3xl animate-float-slow"></div>
-    <div class="absolute -top-20 -right-24 w-[28rem] h-[28rem] bg-gradient-to-bl from-emerald-400/25 via-teal-300/20 to-transparent rounded-full blur-3xl animate-float-reverse"></div>
-    <div class="absolute top-1/2 -right-24 w-80 h-80 bg-gradient-to-tr from-cyan-400/20 via-blue-400/15 to-transparent rounded-full blur-3xl animate-float-slow"></div>
-    <div class="absolute top-2/3 -left-24 w-80 h-80 bg-gradient-to-br from-purple-400/15 via-pink-300/15 to-transparent rounded-full blur-3xl animate-float-reverse"></div>
-  </div>
+    body.glass-canvas-bg {
+      background-color: #eef2ff;
+      background-image:
+        radial-gradient(at 12% 15%, rgba(16, 185, 129, 0.18) 0px, transparent 48%),
+        radial-gradient(at 88% 12%, rgba(234, 88, 12, 0.15) 0px, transparent 45%),
+        radial-gradient(at 52% 55%, rgba(56, 189, 248, 0.14) 0px, transparent 52%),
+        radial-gradient(at 82% 88%, rgba(139, 92, 246, 0.14) 0px, transparent 50%),
+        linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #fff7ed 100%);
+      background-attachment: fixed;
+    }
+
+    .liquid-orb {
+      position: fixed;
+      border-radius: 9999px;
+      filter: blur(68px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.55;
+      animation: floatOrb 18s ease-in-out infinite alternate;
+    }
+    .liquid-orb-1 {
+      width: 380px;
+      height: 380px;
+      top: -80px;
+      left: -80px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.35), rgba(56, 189, 248, 0.1));
+    }
+    .liquid-orb-2 {
+      width: 420px;
+      height: 420px;
+      bottom: -120px;
+      right: -80px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.28), rgba(168, 85, 247, 0.12));
+      animation-delay: -7s;
+    }
+    .liquid-orb-3 {
+      width: 320px;
+      height: 320px;
+      top: 38%;
+      left: 42%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.22), rgba(16, 185, 129, 0.08));
+      animation-delay: -12s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0px, 0px) scale(1); }
+      50% { transform: translate(24px, -18px) scale(1.06); }
+      100% { transform: translate(-18px, 22px) scale(0.96); }
+    }
+
+    .glass-nav-header {
+      background: rgba(15, 23, 42, 0.80) !important;
+      backdrop-filter: blur(22px) saturate(190%) !important;
+      -webkit-backdrop-filter: blur(22px) saturate(190%) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+      box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.35) !important;
+    }
+
+    .glass-subnav {
+      background: rgba(15, 23, 42, 0.72) !important;
+      backdrop-filter: blur(18px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
+    }
+
+    .glass-card {
+      background: var(--glass-bg) !important;
+      backdrop-filter: blur(20px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+      border: 1px solid var(--glass-border) !important;
+      box-shadow: var(--glass-shadow) !important;
+      border-radius: 1.25rem !important;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 18px 42px -10px rgba(15, 23, 42, 0.11), 0 4px 16px -2px rgba(15, 23, 42, 0.05), inset 0 1px 2px 0 rgba(255, 255, 255, 0.95) !important;
+      border-color: rgba(255, 255, 255, 0.92) !important;
+    }
+
+    .glass-panel {
+      background: var(--glass-bg-strong) !important;
+      backdrop-filter: blur(24px) saturate(190%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.18), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95) !important;
+    }
+
+    /* Keep Formal Printable Invoice Paper Crisp Pure White */
+    #invoice-sheet {
+      background: #ffffff !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    @media print {
+      .liquid-orb { display: none !important; }
+      body.glass-canvas-bg { background: #ffffff !important; }
+    }
+
+  </style>
+  <script id="jpf-baked-state">window.__JPF_BAKED_STATE__ = null;</script>
+</head>
+<body class="glass-canvas-bg text-slate-800 font-sans min-h-screen flex flex-col antialiased relative selection:bg-emerald-500 selection:text-white">
+
+  <!-- Ambient Liquid Glass Floating Orbs (No-Print) -->
+  <div class="liquid-orb liquid-orb-1 no-print"></div>
+  <div class="liquid-orb liquid-orb-2 no-print"></div>
+  <div class="liquid-orb liquid-orb-3 no-print"></div>
 
   <!-- Top App Navigation Bar -->
-  <header class="glass-nav-header sticky top-0 z-40 text-white shadow-lg shadow-slate-950/20">
+  <header class="glass-nav-header sticky top-0 z-40 text-white">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-14 sm:h-16">
         
@@ -282,13 +334,6 @@
 
         <!-- Action Buttons -->
         <div class="flex items-center space-x-1.5 sm:space-x-2.5">
-          <!-- User Account / Cloud Login Button -->
-          <button id="btn-open-cloud-auth" type="button" class="touch-press inline-flex items-center space-x-1 sm:space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 shadow transition-all focus:outline-none">
-            <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            <span id="label-cloud-user">Sign In</span>
-          </button>
 
           <!-- Toggle Crew Field Mode vs Manager Mode Button -->
           <button id="btn-toggle-crew-mode" type="button" class="touch-press inline-flex items-center space-x-1 sm:space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow transition-all focus:outline-none">
@@ -299,7 +344,14 @@
             <span class="sm:hidden">Clock-In</span>
           </button>
 
-          <div id="header-manager-actions" class="flex items-center space-x-1.5 sm:space-x-2.5">
+          <div id="header-manager-actions" class="flex items-center space-x-1.5 sm:space-x-2">
+            <!-- Auto-Save & Backup Trigger Button -->
+            <button id="btn-open-save-backup" type="button" title="All changes auto-save! Click to download app with your saved clients or export backup" class="touch-press inline-flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-950/90 hover:bg-emerald-900 text-emerald-300 border border-emerald-500/40 shadow-sm transition-all focus:outline-none">
+              <span id="save-pulse-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="auto-save-status-badge" class="hidden md:inline">✓ Auto-Saved</span>
+              <span class="text-white font-semibold">Save / Backup</span>
+            </button>
+
             <button id="btn-quick-pdf" type="button" class="touch-press inline-flex items-center space-x-1 sm:space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-brand-orange to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white shadow transition-all focus:outline-none focus:ring-2 focus:ring-orange-500">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -407,7 +459,7 @@
       
       <!-- CRM Pipeline Metrics Ribbon -->
       <div class="grid grid-cols-2 md:grid-cols-5 gap-2.5 sm:gap-4 mb-4 sm:mb-6">
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Pipeline</p>
             <p id="crm-stat-total-value" class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5 sm:mt-1 font-mono">$0</p>
@@ -420,7 +472,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Active Jobs</p>
             <p id="crm-stat-active-val" class="text-xl sm:text-2xl font-bold text-emerald-700 mt-0.5 sm:mt-1 font-mono">$0</p>
@@ -433,7 +485,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Estimates Out</p>
             <p id="crm-stat-estimate-val" class="text-xl sm:text-2xl font-bold text-amber-600 mt-0.5 sm:mt-1 font-mono">$0</p>
@@ -446,7 +498,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Invoiced Due</p>
             <p id="crm-stat-invoiced-val" class="text-xl sm:text-2xl font-bold text-blue-700 mt-0.5 sm:mt-1 font-mono">$0</p>
@@ -474,7 +526,7 @@
       </div>
 
       <!-- CRM Action Bar & Pipeline Stage Filters -->
-      <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-slate-200 shadow-sm mb-4 sm:mb-6 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+      <div class="glass-card p-3.5 sm:p-4 rounded-2xl border border-white/80 shadow-sm mb-4 sm:mb-6 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
         
         <!-- Filter Pills -->
         <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 sm:pb-0 text-xs">
@@ -498,8 +550,12 @@
           </button>
         </div>
 
-        <!-- Add Client / Lead Button -->
-        <div class="flex items-center space-x-2">
+        <!-- Add Client / Lead & Save/Backup Buttons -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="btn-crm-open-backup" type="button" class="touch-press inline-flex items-center justify-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-emerald-900 bg-emerald-100/90 hover:bg-emerald-200 border border-emerald-300 shadow-xs transition">
+            <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+            <span>Save / Backup Clients</span>
+          </button>
           <button id="btn-open-add-lead" type="button" class="touch-press w-full sm:w-auto inline-flex items-center justify-center space-x-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -546,7 +602,7 @@
       
       <!-- Top Overview Banner (Responsive Grid) -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-4 sm:mb-6">
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Crew Hours</p>
             <p id="stat-labor-hours" class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5 sm:mt-1 font-mono">0.0</p>
@@ -559,7 +615,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Labor Billable</p>
             <p id="stat-labor-cost" class="text-xl sm:text-2xl font-bold text-emerald-700 mt-0.5 sm:mt-1 font-mono">$0.00</p>
@@ -572,7 +628,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Workdays</p>
             <p id="stat-workdays" class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5 sm:mt-1 font-mono">0</p>
@@ -585,7 +641,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Roles Active</p>
             <div id="stat-role-pill-summary" class="flex flex-wrap gap-1 mt-1 text-xs">
@@ -601,7 +657,7 @@
       </div>
 
       <!-- Action & Filter Bar (Mobile-friendly Stack) -->
-      <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-slate-200 shadow-sm mb-4 sm:mb-6 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+      <div class="glass-card p-3.5 sm:p-4 rounded-2xl border border-white/80 shadow-sm mb-4 sm:mb-6 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
         <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-2">
           <button id="btn-open-add-labor" type="button" class="touch-press inline-flex items-center justify-center space-x-1.5 sm:space-x-2 px-3 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm transition">
             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -659,7 +715,7 @@
       </div>
 
       <!-- Collapsible Crew Hours & Payroll Breakdown Card -->
-      <div id="crew-payroll-card" class="bg-white rounded-xl border border-slate-200 shadow-sm mb-4 sm:mb-6 overflow-hidden hidden transition-all">
+      <div id="crew-payroll-card" class="glass-card rounded-2xl border border-white/80 shadow-sm mb-4 sm:mb-6 overflow-hidden hidden transition-all">
         <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between">
           <div class="flex items-center space-x-2">
             <div class="w-6 h-6 rounded bg-emerald-600 flex items-center justify-center text-xs">
@@ -711,7 +767,7 @@
       
       <!-- Materials Metrics Cards -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-4 sm:mb-6">
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Items</p>
             <p id="stat-mat-items" class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5 sm:mt-1 font-mono">0</p>
@@ -724,7 +780,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Direct Cost</p>
             <p id="stat-mat-cost" class="text-xl sm:text-2xl font-bold text-slate-800 mt-0.5 sm:mt-1 font-mono">$0.00</p>
@@ -737,7 +793,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Markup</p>
             <p id="stat-mat-markup" class="text-xl sm:text-2xl font-bold text-orange-600 mt-0.5 sm:mt-1 font-mono">$0.00</p>
@@ -750,7 +806,7 @@
           </div>
         </div>
 
-        <div class="glass-card p-3 sm:p-4 rounded-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] flex items-center justify-between">
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Billable</p>
             <p id="stat-mat-billable" class="text-xl sm:text-2xl font-bold text-emerald-700 mt-0.5 sm:mt-1 font-mono">$0.00</p>
@@ -765,7 +821,7 @@
       </div>
 
       <!-- Action & Add Material Form Bar -->
-      <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-slate-200 shadow-sm mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+      <div class="glass-card p-3.5 sm:p-4 rounded-2xl border border-white/80 shadow-sm mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:space-x-3">
           <button id="btn-open-add-material" type="button" class="touch-press inline-flex items-center justify-center space-x-1.5 sm:space-x-2 px-3 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-brand-orange hover:bg-orange-700 shadow-sm transition">
             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -871,7 +927,7 @@
           </div>
           
           <!-- Customer & Jobsite Card -->
-          <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="glass-card p-4 sm:p-6 rounded-2xl border border-white/80 shadow-sm">
             <h3 class="text-sm sm:text-base font-bold text-slate-900 border-b border-slate-100 pb-2.5 mb-3.5 flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
               <span>Client & Jobsite Information</span>
@@ -910,7 +966,7 @@
           </div>
 
           <!-- Contractor Company Info (Pre-filled for Junior's Pro Finish) -->
-          <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="glass-card p-4 sm:p-6 rounded-2xl border border-white/80 shadow-sm">
             <h3 class="text-sm sm:text-base font-bold text-slate-900 border-b border-slate-100 pb-2.5 mb-3.5 flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-brand-orange"></span>
               <span>Your Company Details (Remittance & Header)</span>
@@ -1027,7 +1083,7 @@
         <!-- Right: Invoice Metadata & Terms -->
         <div class="space-y-4 sm:space-y-6">
           
-          <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="glass-card p-4 sm:p-6 rounded-2xl border border-white/80 shadow-sm">
             <h3 class="text-sm sm:text-base font-bold text-slate-900 border-b border-slate-100 pb-2.5 mb-3.5 flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
               <span>Invoice Specifications</span>
@@ -1104,20 +1160,15 @@
                       Apply Weighted Avg
                     </button>
                   </div>
-                </div>
 
-                <!-- Client Privacy & Worker Name Protection Box -->
-                <div class="p-3 bg-gradient-to-r from-blue-50/90 to-indigo-50/80 rounded-xl border border-blue-200/80 text-xs space-y-1.5 shadow-xs">
-                  <div class="flex items-center justify-between">
-                    <label for="inv-hide-worker-names" class="font-bold text-blue-950 flex items-center space-x-2 cursor-pointer select-none">
-                      <input type="checkbox" id="inv-hide-worker-names" checked class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
-                      <span>Omit Worker Names & Roles on Client Invoices</span>
+                  <!-- Privacy Option: Omit Worker Names & Roles on Client Invoice -->
+                  <div class="pt-2 border-t border-blue-200/60 flex items-start space-x-2">
+                    <input id="inv-hide-worker-names" type="checkbox" checked class="mt-0.5 h-4 w-4 rounded border-blue-300 text-blue-600 focus:ring-blue-500" />
+                    <label for="inv-hide-worker-names" class="text-[11px] text-blue-950 leading-snug cursor-pointer">
+                      <span class="font-bold block">Client Privacy Mode: Omit Worker Names &amp; Roles on Invoice</span>
+                      <span class="text-[10px] text-slate-600">When Blended Rate is active, hides individual employee names and role tiers on the client invoice &amp; PDF so clients only see date, work performed, hours, and the flat blended rate.</span>
                     </label>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-300">Privacy Active</span>
                   </div>
-                  <p class="text-[11px] text-slate-600 leading-snug">
-                    Protects worker privacy and prevents client micromanaging or wage-checking. Clients receive itemized dates and work performed at the flat blended rate without individual names or wage tiers.
-                  </p>
                 </div>
               </div>
 
@@ -1154,7 +1205,7 @@
           </div>
 
           <!-- Field Paint Specifications & Manager PIN Settings -->
-          <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="glass-card p-4 sm:p-6 rounded-2xl border border-white/80 shadow-sm">
             <h3 class="text-sm sm:text-base font-bold text-slate-900 border-b border-slate-100 pb-2.5 mb-3.5 flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
               <span>Jobsite Paint & Sheen Specifications</span>
@@ -1184,103 +1235,8 @@
             </div>
           </div>
 
-          <!-- Firebase Cloud Database & Real-Time Sync Settings -->
-          <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-sm space-y-3.5">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
-              <div class="flex items-center space-x-2">
-                <div class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M4.654 18.066L8.41 2.502a.85.85 0 0 1 1.62-.06l2.36 5.864-7.736 9.76zm14.692-4.144l-2.074-6.38a.85.85 0 0 0-1.614-.03L3.15 19.86l8.847 4.975a1.7 1.7 0 0 0 1.644 0l5.705-3.21 2.22-3.844a.85.85 0 0 0-.22-1.859z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">Firebase Cloud Database & Sync</h3>
-                  <p class="text-[11px] text-slate-500">Real-time multi-device cloud storage for your jobs & crew</p>
-                </div>
-              </div>
-              <div id="firebase-status-pill">
-                <span class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                  <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
-                  <span>Local Offline Mode</span>
-                </span>
-              </div>
-            </div>
-
-            <!-- Quick Paste Firebase Config -->
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <label class="block text-xs font-bold text-slate-700">Paste Firebase Web Config Code:</label>
-                <button type="button" id="btn-toggle-manual-fb-fields" class="text-[10px] font-bold text-blue-600 hover:underline">Manual Fields &rarr;</button>
-              </div>
-              <textarea id="firebase-raw-config" rows="3" placeholder="Paste the firebaseConfig object from your Firebase tab here:
-const firebaseConfig = {
-  apiKey: &quot;...&quot;,
-  authDomain: &quot;...&quot;,
-  projectId: &quot;...&quot;,
-  storageBucket: &quot;...&quot;,
-  messagingSenderId: &quot;...&quot;,
-  appId: &quot;...&quot;
-};" class="w-full text-xs font-mono rounded-xl border-slate-300 border p-2.5 text-slate-800 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-amber-500"></textarea>
-            </div>
-
-            <!-- Hidden/Collapsible Individual Fields -->
-            <div id="firebase-manual-fields" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 font-mono text-[11px]">
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 uppercase font-sans">apiKey</label>
-                <input id="fb-field-apiKey" type="text" placeholder="AIzaSy..." class="w-full rounded border-slate-300 border p-1 bg-white" />
-              </div>
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 uppercase font-sans">authDomain</label>
-                <input id="fb-field-authDomain" type="text" placeholder="project.firebaseapp.com" class="w-full rounded border-slate-300 border p-1 bg-white" />
-              </div>
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 uppercase font-sans">projectId</label>
-                <input id="fb-field-projectId" type="text" placeholder="juniors-pro-finish" class="w-full rounded border-slate-300 border p-1 bg-white" />
-              </div>
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 uppercase font-sans">storageBucket</label>
-                <input id="fb-field-storageBucket" type="text" placeholder="project.appspot.com" class="w-full rounded border-slate-300 border p-1 bg-white" />
-              </div>
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 uppercase font-sans">messagingSenderId</label>
-                <input id="fb-field-messagingSenderId" type="text" placeholder="123456789" class="w-full rounded border-slate-300 border p-1 bg-white" />
-              </div>
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 uppercase font-sans">appId</label>
-                <input id="fb-field-appId" type="text" placeholder="1:12345:web:..." class="w-full rounded border-slate-300 border p-1 bg-white" />
-              </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex flex-wrap items-center gap-2 pt-1">
-              <button id="btn-connect-firebase" type="button" class="touch-press px-4 py-2 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-700 shadow transition flex items-center space-x-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                <span>Save & Connect Firebase</span>
-              </button>
-
-              <button id="btn-sync-to-cloud" type="button" class="touch-press px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition flex items-center space-x-1.5">
-                <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                <span>Upload Local Data to Cloud</span>
-              </button>
-
-              <button id="btn-disconnect-firebase" type="button" class="touch-press px-3 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-red-600 transition">
-                Disconnect
-              </button>
-            </div>
-
-            <!-- Quick Instructions Box -->
-            <div class="bg-amber-50/70 p-3 rounded-xl border border-amber-200/80 text-[11px] text-amber-950 space-y-1">
-              <strong class="block font-bold">How to copy your config from your open Firebase tab:</strong>
-              <ol class="list-decimal list-inside space-y-0.5 text-amber-900 leading-relaxed">
-                <li>In your Firebase Console, click the <strong>Gear icon &rarr; Project Settings</strong> (top left).</li>
-                <li>Scroll down to the <strong>"Your apps"</strong> section. If no web app exists, click the Web icon <code>&lt;/&gt;</code> to register it.</li>
-                <li>Under <strong>"Firebase SDK snippet"</strong>, select <strong>Config</strong>, copy the code, and paste it into the box above!</li>
-              </ol>
-            </div>
-          </div>
-
           <!-- Crew Clock-In Security & Manager PIN -->
-          <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="glass-card p-4 sm:p-6 rounded-2xl border border-white/80 shadow-sm">
             <h3 class="text-sm sm:text-base font-bold text-slate-900 border-b border-slate-100 pb-2.5 mb-3 flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
               <span>Crew Clock-In Security & Manager PIN</span>
@@ -1298,7 +1254,7 @@ const firebaseConfig = {
           </div>
 
           <!-- Remittance & Warranty Note -->
-          <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="glass-card p-4 sm:p-6 rounded-2xl border border-white/80 shadow-sm">
             <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">Remittance & Warranty</h3>
             <p class="text-xs text-slate-500 leading-relaxed mb-2.5">
               Includes Junior's Pro Finish LLC 1-Year Workmanship Warranty and lien waiver certification upon receipt of cleared funds.
@@ -1315,32 +1271,30 @@ const firebaseConfig = {
     <div id="tab-content-preview" class="tab-pane hidden">
       
       <!-- Toolbar for PDF & Printing (Refined for Mobile Touch) -->
-      <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-slate-200 shadow-sm mb-4 sm:mb-6 no-print space-y-3">
+      <div class="glass-card p-3.5 sm:p-4 rounded-2xl border border-white/80 shadow-sm mb-4 sm:mb-6 no-print space-y-3">
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <div class="flex items-center space-x-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-100 text-emerald-800">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-100/90 text-emerald-800 border border-emerald-300/60">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mr-1.5"></span>
               Client Ready
             </span>
-            <span class="text-xs text-slate-500 hidden sm:inline">Live preview matches exported PDF & print document.</span>
+            <!-- Quick Billing Mode Switcher right on the Preview Tab -->
+            <div class="inline-flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/80 text-xs">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-2">Invoice Mode:</span>
+              <button type="button" id="btn-preview-toggle-mode" class="touch-press px-2.5 py-1 rounded-lg font-bold text-xs bg-white text-slate-800 shadow-xs border border-slate-200/80 hover:bg-blue-50 transition">
+                Switch to Blended Hours ($58/hr • Hide Names/Roles)
+              </button>
+            </div>
+            <span id="preview-privacy-badge" class="hidden inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-900 border border-blue-300">
+              🔒 Worker Names &amp; Roles Omitted
+            </span>
           </div>
 
-          <!-- Quick Billing & Privacy Toggle inside Preview Toolbar -->
-          <div class="flex items-center space-x-2">
-            <div class="flex items-center space-x-1.5 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
-              <span class="text-[11px] font-semibold text-slate-500 hidden sm:inline px-1">Invoice Billing:</span>
-              <button id="btn-preview-toggle-mode" type="button" class="touch-press px-2.5 py-1 rounded-md text-[11px] font-bold text-blue-900 bg-white shadow-xs border border-blue-300 hover:bg-blue-50 transition flex items-center space-x-1.5">
-                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                <span id="btn-preview-mode-text">Blended Rate ($58/hr) • Names Omitted</span>
-              </button>
-            </div>
-
-            <!-- Zoom / Fit to Screen Toggle for Mobile Screen Viewing -->
-            <div class="sm:hidden">
-              <button id="btn-toggle-fit-screen" type="button" class="touch-press px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 border border-slate-300">
-                Fit to Screen: <span id="fit-screen-state" class="text-emerald-700 font-bold">ON</span>
-              </button>
-            </div>
+          <!-- Zoom / Fit to Screen Toggle for Mobile Screen Viewing -->
+          <div class="sm:hidden">
+            <button id="btn-toggle-fit-screen" type="button" class="touch-press px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 border border-slate-300">
+              Fit to Screen: <span id="fit-screen-state" class="text-emerald-700 font-bold">ON</span>
+            </button>
           </div>
         </div>
 
@@ -1501,11 +1455,11 @@ const firebaseConfig = {
                 </tbody>
                 <tfoot>
                   <tr class="bg-emerald-50/70 font-bold text-slate-900 border-t-2 border-slate-300">
-                    <td id="doc-labor-tfoot-label" colspan="4" class="py-2.5 px-2.5 text-right text-xs">
+                    <td id="doc-labor-tfoot-label-cell" colspan="4" class="py-2.5 px-2.5 text-right text-xs">
                       Labor Subtotal (<span id="doc-labor-role-summary" class="font-normal text-slate-600 text-[11px]">Summary</span>):
                     </td>
                     <td id="doc-labor-total-hours" class="py-2.5 px-2 text-right font-mono text-xs">0.0</td>
-                    <td id="doc-labor-tfoot-rate-col" class="py-2.5 px-2.5 text-right text-[11px] text-slate-500">—</td>
+                    <td class="py-2.5 px-2.5 text-right text-[11px] text-slate-500">—</td>
                     <td id="doc-labor-subtotal" class="py-2.5 px-2.5 text-right font-mono text-xs sm:text-sm text-emerald-800">$0.00</td>
                   </tr>
                 </tfoot>
@@ -2674,109 +2628,85 @@ const firebaseConfig = {
 
     </div>
   </div>
+  </div>
 
-  <!-- MODAL: FIREBASE USER AUTHENTICATION & EMPLOYEE ACCOUNTS -->
-  <div id="modal-firebase-auth" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-950/60 backdrop-blur-sm hidden p-0 sm:p-4">
-    <div class="modal-sheet-dialog bg-white rounded-t-2xl sm:rounded-2xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[92vh]">
-      
-      <div class="px-5 py-3.5 bg-slate-900 text-white flex items-center justify-between flex-shrink-0">
-        <div class="flex items-center space-x-2.5">
-          <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shadow">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M4.654 18.066L8.41 2.502a.85.85 0 0 1 1.62-.06l2.36 5.864-7.736 9.76zm14.692-4.144l-2.074-6.38a.85.85 0 0 0-1.614-.03L3.15 19.86l8.847 4.975a1.7 1.7 0 0 0 1.644 0l5.705-3.21 2.22-3.844a.85.85 0 0 0-.22-1.859z"/>
-            </svg>
+    <!-- MODAL: SAVE & BACKUP CENTER -->
+  <div id="modal-save-backup" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-4 overflow-y-auto">
+    <div class="glass-panel bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-white/80 overflow-hidden p-5 sm:p-6 space-y-4 my-8">
+      <div class="flex items-start justify-between border-b border-slate-200/80 pb-3.5">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
           </div>
           <div>
-            <h3 class="font-bold text-sm sm:text-base leading-tight">Employee Accounts & Cloud Login</h3>
-            <p class="text-[11px] text-slate-400">Junior's Pro Finish Team Cloud</p>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900">Save &amp; Backup Your Clients &amp; App Data</h3>
+            <p class="text-xs text-slate-500">Keep your clients, invoices, crew hours, and logo permanently saved</p>
           </div>
         </div>
-        <button type="button" class="btn-close-modal text-slate-400 hover:text-white p-1 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        <button type="button" class="btn-close-modal p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
-      <!-- Auth Tabs: Sign In vs Create Account -->
-      <div class="p-4 sm:p-6 overflow-y-auto space-y-4">
-        <div class="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl text-xs font-bold text-center">
-          <button type="button" id="tab-auth-signin" class="py-2 rounded-lg bg-white text-slate-900 shadow-xs transition">Sign In</button>
-          <button type="button" id="tab-auth-signup" class="py-2 rounded-lg text-slate-500 hover:text-slate-800 transition">Create Account</button>
-        </div>
-
-        <!-- Current User Status (if logged in) -->
-        <div id="auth-current-user-banner" class="hidden bg-emerald-50 p-3 rounded-xl border border-emerald-200 text-xs flex items-center justify-between">
-          <div>
-            <span class="text-[10px] uppercase font-bold text-emerald-800 block">Logged In:</span>
-            <span id="auth-current-user-email" class="font-bold text-emerald-950 font-mono">user@example.com</span>
-            <span id="auth-current-user-role" class="text-[11px] text-emerald-700 block mt-0.5">Role: Manager / Admin</span>
+      <!-- 1. Automatic Browser Save Status -->
+      <div class="bg-emerald-50/90 border border-emerald-200 rounded-2xl p-3.5 flex items-start space-x-3">
+        <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</div>
+        <div class="text-xs text-emerald-950 space-y-1 flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sm">Browser Auto-Save is Active</span>
+            <span id="backup-modal-last-saved" class="text-[11px] font-mono bg-emerald-200/80 text-emerald-900 px-2 py-0.5 rounded-md font-bold">Saved just now</span>
           </div>
-          <button type="button" id="btn-auth-signout" class="touch-press px-3 py-1.5 bg-white text-red-600 border border-red-200 hover:bg-red-50 rounded-lg font-bold text-xs shadow-xs">
-            Sign Out
-          </button>
-        </div>
-
-        <!-- FORM 1: SIGN IN -->
-        <form id="form-auth-signin" class="space-y-3.5">
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
-            <input id="signin-email" type="email" placeholder="e.g. pablo@juniorsprofinish.com" required class="w-full text-sm rounded-xl border-slate-300 border p-2.5 text-slate-900 focus:ring-2 focus:ring-amber-500" />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Password</label>
-            <input id="signin-password" type="password" placeholder="••••••••" required class="w-full text-sm rounded-xl border-slate-300 border p-2.5 text-slate-900 focus:ring-2 focus:ring-amber-500 font-mono" />
-          </div>
-          <button type="submit" class="touch-press w-full py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 shadow transition">
-            Sign In to Account
-          </button>
-        </form>
-
-        <!-- FORM 2: CREATE EMPLOYEE ACCOUNT -->
-        <form id="form-auth-signup" class="space-y-3.5 hidden">
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Employee / Worker Name</label>
-            <select id="signup-worker-select" class="w-full text-sm rounded-xl border-slate-300 border p-2.5 text-slate-900 font-bold">
-              <option value="Junior">Junior (Owner / Admin)</option>
-              <option value="Felipe">Felipe (Lead / Foreman)</option>
-              <option value="Erling">Erling (Journeyman)</option>
-              <option value="Carolyn">Carolyn (Journeyman)</option>
-              <option value="Pablo" selected>Pablo (Journeyman)</option>
-              <option value="Brendan">Brendan (Journeyman)</option>
-              <option value="Bianca">Bianca (Helper)</option>
-              <option value="Francisco">Francisco (Helper)</option>
-              <option value="Wendy">Wendy (Helper)</option>
-              <option value="Christian">Christian (Helper)</option>
-              <option value="Chase">Chase (Helper)</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Account Permissions</label>
-            <select id="signup-role-select" class="w-full text-sm rounded-xl border-slate-300 border p-2.5 text-slate-900 font-medium">
-              <option value="crew" selected>Field Worker (Clock-in only, rates & markups hidden)</option>
-              <option value="manager">Manager / Admin (Full pricing & invoice access)</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
-            <input id="signup-email" type="email" placeholder="e.g. pablo@juniorsprofinish.com" required class="w-full text-sm rounded-xl border-slate-300 border p-2.5 text-slate-900 focus:ring-2 focus:ring-amber-500" />
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Password (at least 6 characters)</label>
-            <input id="signup-password" type="password" minlength="6" placeholder="Create password" required class="w-full text-sm rounded-xl border-slate-300 border p-2.5 text-slate-900 focus:ring-2 focus:ring-amber-500 font-mono" />
-          </div>
-
-          <button type="submit" class="touch-press w-full py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-amber-600 hover:bg-amber-700 shadow transition">
-            Create Employee Account
-          </button>
-        </form>
-
-        <div class="text-[11px] text-slate-400 text-center pt-1 border-t border-slate-100">
-          Make sure <strong>Authentication &rarr; Email/Password</strong> is enabled in your Firebase console.
+          <p class="text-emerald-800 leading-relaxed">
+            Every client you add, edit, or delete—plus all crew shifts, materials, rates, and your company logo—is automatically saved to this browser's storage (<span id="backup-modal-stats" class="font-bold">5 clients</span>).
+          </p>
         </div>
       </div>
 
+      <!-- 2. Download Updated HTML App With Data Baked In (Best for Canvas / Moving Devices) -->
+      <div class="bg-blue-50/90 border border-blue-200 rounded-2xl p-4 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-900">Recommended: Permanent App File Save</span>
+          <span class="text-[10px] font-bold bg-blue-200/80 text-blue-900 px-2 py-0.5 rounded">Works Offline &amp; Across Devices</span>
+        </div>
+        <p class="text-xs text-slate-700 leading-relaxed">
+          Download a fresh copy of this HTML app with <strong>all of your current clients, jobs, crew roster, and logo permanently baked inside the file</strong>. Whenever you open that file on your computer, phone, or tablet, your data is already inside!
+        </p>
+        <button id="btn-download-baked-html" type="button" class="touch-press w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md flex items-center justify-center space-x-2 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Download App With My Saved Data (.html)</span>
+        </button>
+      </div>
+
+      <!-- 3. JSON Backup File Export / Import -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2.5">
+        <span class="text-xs font-bold text-slate-800 block">Backup File (.json) Export &amp; Restore</span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button id="btn-export-json-backup" type="button" class="touch-press py-2 px-3 rounded-xl text-xs font-bold text-slate-800 bg-white hover:bg-slate-100 border border-slate-300 shadow-xs flex items-center justify-center space-x-1.5">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Export Backup (.json)</span>
+          </button>
+          <label class="touch-press py-2 px-3 rounded-xl text-xs font-bold text-slate-800 bg-white hover:bg-slate-100 border border-slate-300 shadow-xs flex items-center justify-center space-x-1.5 cursor-pointer">
+            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            <span>Restore Backup (.json)</span>
+            <input id="input-import-json-backup" type="file" accept=".json,application/json" class="hidden" />
+          </label>
+        </div>
+      </div>
+
+      <!-- 4. Clear Demo Clients / Start Fresh -->
+      <div class="pt-2 border-t border-slate-200/80 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-slate-700 block">Want to remove the 5 sample demo clients?</span>
+          <span class="text-[11px] text-slate-500">Wipes demo jobs so you only see your own real clients</span>
+        </div>
+        <button id="btn-clear-demo-clients" type="button" class="touch-press px-3 py-1.5 rounded-xl text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 transition">
+          Clear Demo Jobs
+        </button>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-slate-100">
+        <button type="button" class="btn-close-modal px-5 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800">Done</button>
+      </div>
     </div>
   </div>
 
@@ -3026,9 +2956,6 @@ const firebaseConfig = {
     const AppState = {
       mode: 'manager', // 'manager' | 'crew'
       managerPin: '1234',
-      firebaseConfig: null,
-      currentUser: null,
-      isFirebaseConnected: false,
       crmFilter: 'all', // 'all' | 'lead' | 'estimate' | 'active' | 'invoiced' | 'paid'
       activeWorkerId: 'w-pablo',
       clockInState: {
@@ -3058,9 +2985,8 @@ const firebaseConfig = {
         taxRate: 0.00,
         retainageRate: 0.00,
         includeLienWaiver: true,
-        laborBillingMode: 'blended',
+        laborBillingMode: 'role',
         blendedRate: 58.00,
-        hideWorkerNames: true,
         deposit: 500.00,
         paymentNotes: 'Remit check payments to: Junior\'s Pro Finish LLC, Toledo IA.\nElectronic payments: juniorsprofinish@gmail.com / (641) 261-3003. Thank you for your business!'
       },
@@ -3155,9 +3081,6 @@ const firebaseConfig = {
           taxRate: 0.00,
           retainageRate: 0.00,
           includeLienWaiver: true,
-          laborBillingMode: 'blended',
-          blendedRate: 58.00,
-          hideWorkerNames: true,
           deposit: 500.00,
           paymentNotes: 'Remit check payments to: Junior\'s Pro Finish LLC, Toledo IA.\nElectronic payments: juniorsprofinish@gmail.com / (641) 261-3003. Thank you for your business!'
         },
@@ -3462,25 +3385,88 @@ const firebaseConfig = {
       confirmCallback = null;
     }
 
-    // Local Storage Persistence
+    // Triple-Layer Persistence: LocalStorage + IndexedDB + Downloadable Baked HTML
+    function syncActiveJobIntoSavedJobs() {
+      if (!AppState.savedJobs || !Array.isArray(AppState.savedJobs)) {
+        AppState.savedJobs = [];
+      }
+      if (!AppState.currentJobId) {
+        AppState.currentJobId = AppState.savedJobs[0]?.id || ('job-' + Date.now().toString(36));
+      }
+      let currentJob = AppState.savedJobs.find(j => j.id === AppState.currentJobId);
+      const cleanTitle = `${AppState.client?.name || 'Client Project'} (${AppState.invoiceMeta?.number || 'No #'})`;
+      if (currentJob) {
+        currentJob.laborEntries = JSON.parse(JSON.stringify(AppState.laborEntries || []));
+        currentJob.materials = JSON.parse(JSON.stringify(AppState.materials || []));
+        currentJob.client = JSON.parse(JSON.stringify(AppState.client || {}));
+        currentJob.paintSpecs = AppState.client?.paintSpecs ? JSON.parse(JSON.stringify(AppState.client.paintSpecs)) : (currentJob.paintSpecs || {});
+        currentJob.invoiceMeta = JSON.parse(JSON.stringify(AppState.invoiceMeta || {}));
+        currentJob.number = AppState.invoiceMeta?.number || currentJob.number || 'JPF-2026-104';
+        currentJob.date = AppState.invoiceMeta?.date || currentJob.date;
+        currentJob.title = cleanTitle;
+      } else if (AppState.client && (AppState.client.name || (AppState.laborEntries && AppState.laborEntries.length > 0))) {
+        AppState.savedJobs.unshift({
+          id: AppState.currentJobId,
+          title: cleanTitle,
+          number: AppState.invoiceMeta?.number || 'JPF-2026-104',
+          status: 'active',
+          estimateAmount: 0,
+          date: AppState.invoiceMeta?.date || new Date().toISOString().split('T')[0],
+          client: JSON.parse(JSON.stringify(AppState.client || {})),
+          paintSpecs: AppState.client?.paintSpecs ? JSON.parse(JSON.stringify(AppState.client.paintSpecs)) : {},
+          invoiceMeta: JSON.parse(JSON.stringify(AppState.invoiceMeta || {})),
+          laborEntries: JSON.parse(JSON.stringify(AppState.laborEntries || [])),
+          materials: JSON.parse(JSON.stringify(AppState.materials || []))
+        });
+      }
+    }
+
+    function saveToIndexedDB(stateObj) {
+      try {
+        if (!window.indexedDB) return;
+        const req = window.indexedDB.open('JuniorsProFinishDB', 1);
+        req.onupgradeneeded = function(e) {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains('app_state')) {
+            db.createObjectStore('app_state');
+          }
+        };
+        req.onsuccess = function(e) {
+          const db = e.target.result;
+          const tx = db.transaction('app_state', 'readwrite');
+          tx.objectStore('app_state').put(JSON.parse(JSON.stringify(stateObj)), 'latest');
+        };
+      } catch (e) {
+        // Ignore IndexedDB errors in restricted contexts
+      }
+    }
+
+    function updateAutoSaveIndicator() {
+      const badge = document.getElementById('auto-save-status-badge');
+      const modalLastSaved = document.getElementById('backup-modal-last-saved');
+      const modalStats = document.getElementById('backup-modal-stats');
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      if (badge) {
+        badge.textContent = `✓ Saved ${timeStr}`;
+      }
+      if (modalLastSaved) {
+        modalLastSaved.textContent = `Auto-saved at ${timeStr}`;
+      }
+      if (modalStats) {
+        const jobCount = (AppState.savedJobs || []).length;
+        modalStats.textContent = `${jobCount} client project${jobCount === 1 ? '' : 's'}`;
+      }
+    }
+
     function saveToStorage() {
       try {
-        if (AppState.savedJobs && AppState.currentJobId) {
-          const currentJob = AppState.savedJobs.find(j => j.id === AppState.currentJobId);
-          if (currentJob) {
-            currentJob.laborEntries = JSON.parse(JSON.stringify(AppState.laborEntries || []));
-            currentJob.materials = JSON.parse(JSON.stringify(AppState.materials || []));
-            currentJob.client = { ...AppState.client };
-            currentJob.paintSpecs = AppState.client.paintSpecs ? { ...AppState.client.paintSpecs } : (currentJob.paintSpecs || {});
-            currentJob.invoiceMeta = { ...AppState.invoiceMeta };
-            currentJob.title = `${AppState.client.name || 'Job'} (${AppState.invoiceMeta.number || 'No #'})`;
-          }
-        }
-        localStorage.setItem('juniors_pro_finish_app_state', JSON.stringify(AppState));
-        if (fbDb && AppState.currentJobId && !isRemoteSyncInProgress) {
-          const currentJob = (AppState.savedJobs || []).find(j => j.id === AppState.currentJobId);
-          if (currentJob) syncJobToFirebase(currentJob);
-        }
+        syncActiveJobIntoSavedJobs();
+        AppState.lastSavedAt = Date.now();
+        const serialized = JSON.stringify(AppState);
+        localStorage.setItem('juniors_pro_finish_app_state', serialized);
+        saveToIndexedDB(AppState);
+        updateAutoSaveIndicator();
       } catch (err) {
         console.warn('Storage error:', err);
       }
@@ -3488,10 +3474,18 @@ const firebaseConfig = {
 
     function loadFromStorage() {
       try {
+        let parsed = null;
         const stored = localStorage.getItem('juniors_pro_finish_app_state');
         if (stored) {
-          const parsed = JSON.parse(stored);
+          parsed = JSON.parse(stored);
+        } else if (window.__JPF_BAKED_STATE__ && typeof window.__JPF_BAKED_STATE__ === 'object') {
+          parsed = JSON.parse(JSON.stringify(window.__JPF_BAKED_STATE__));
+        }
+        if (parsed) {
           Object.assign(AppState, parsed);
+          if (AppState.invoiceMeta && AppState.invoiceMeta.hideWorkerNames === undefined) {
+            AppState.invoiceMeta.hideWorkerNames = true;
+          }
           if (!AppState.rates.Apprentice) {
             AppState.rates.Apprentice = 50;
           }
@@ -4007,7 +4001,7 @@ const firebaseConfig = {
           const workerCount = new Set(dayEntries.map(e => e.worker)).size;
 
           html += `
-            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-3.5 sm:mb-4">
+            <div class="glass-card rounded-2xl border border-white/80 shadow-sm overflow-hidden mb-3.5 sm:mb-4">
               <div class="bg-slate-50 border-b border-slate-200 px-3.5 sm:px-4 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-1.5">
                 <div class="flex items-center space-x-2">
                   <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
@@ -4156,7 +4150,7 @@ const firebaseConfig = {
 
       } else {
         let html = `
-          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="glass-card rounded-2xl border border-white/80 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
                 <thead>
@@ -4901,8 +4895,8 @@ function openRatesModal() {
     // Multi-Job / Saved Invoices Functions
     
     // Multi-Job & CRM Pipeline Initialization
-    function initSavedJobs() {
-      if (!AppState.savedJobs || AppState.savedJobs.length <= 2) {
+    function initSavedJobs(forceDemo = false) {
+      if (forceDemo || (!AppState.savedJobs || !Array.isArray(AppState.savedJobs) || AppState.savedJobs.length === 0)) {
         AppState.savedJobs = [
           {
             id: 'job-apex-104',
@@ -5167,7 +5161,6 @@ function openRatesModal() {
       }
 
       saveToStorage();
-      syncJobToFirebase(jobData);
       renderJobSwitcher();
       renderCrmPipeline();
       showToast(`Saved job "${jobData.title}"`);
@@ -5518,8 +5511,12 @@ function openRatesModal() {
 
             <!-- Card Bottom Actions -->
             <div class="flex items-center justify-between pt-2 border-t border-slate-100">
-              <div>
-                ${!isCurrent ? `<button type="button" class="btn-crm-activate-job touch-press px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition" data-id="${j.id}">Set as Active Job</button>` : '<span class="text-[11px] font-bold text-emerald-700 flex items-center space-x-1"><svg class="w-3.5 h-3.5 text-emerald-600 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Currently Active</span></span>'}
+              <div class="flex items-center space-x-1.5">
+                <button type="button" class="btn-crm-open-invoice touch-press px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition flex items-center space-x-1" data-id="${j.id}">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  <span>Open Invoice &rarr;</span>
+                </button>
+                ${!isCurrent ? `<button type="button" class="btn-crm-activate-job touch-press px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition" data-id="${j.id}">Activate</button>` : ''}
               </div>
 
               <div class="flex items-center space-x-1">
@@ -5558,10 +5555,19 @@ function openRatesModal() {
         });
       });
 
+      // Open Invoice Directly from CRM Card
+      document.querySelectorAll('.btn-crm-open-invoice').forEach(btn => {
+        btn.addEventListener('click', () => {
+          loadJob(btn.dataset.id);
+          switchTab('preview');
+        });
+      });
+
       // Activate Job
       document.querySelectorAll('.btn-crm-activate-job').forEach(btn => {
         btn.addEventListener('click', () => {
           loadJob(btn.dataset.id);
+          switchTab('labor');
         });
       });
 
@@ -6012,234 +6018,7 @@ function openRatesModal() {
       }
     }
 
-
-    // ==========================================
-    // FIREBASE CLOUD DATABASE & MULTI-DEVICE SYNC
-    // ==========================================
-    let fbApp = null;
-    let fbAuth = null;
-    let fbDb = null;
-    let isRemoteSyncInProgress = false;
-
-    // Parse raw JS config snippet pasted from Firebase console
-    function parseFirebaseConfigSnippet(text) {
-      if (!text || typeof text !== 'string') return null;
-      try {
-        const cleanText = text.trim();
-        // If JSON format
-        if (cleanText.startsWith('{') && cleanText.endsWith('}')) {
-          return JSON.parse(cleanText);
-        }
-        // Extract keys via regex from JS code
-        const extractKey = (key) => {
-          const m = text.match(new RegExp(key + '[\\s]*:[\\s]*["\'`]([^"\'`]+)["\'`]'));
-          return m ? m[1].trim() : '';
-        };
-
-        const config = {
-          apiKey: extractKey('apiKey'),
-          authDomain: extractKey('authDomain'),
-          projectId: extractKey('projectId'),
-          storageBucket: extractKey('storageBucket'),
-          messagingSenderId: extractKey('messagingSenderId'),
-          appId: extractKey('appId')
-        };
-
-        if (config.apiKey && config.projectId) {
-          return config;
-        }
-      } catch (err) {
-        console.warn('Config parse error:', err);
-      }
-      return null;
-    }
-
-    // Initialize Firebase
-    function initFirebase(config) {
-      if (typeof firebase === 'undefined') {
-        console.warn('Firebase SDK not loaded in browser');
-        return false;
-      }
-      if (!config || !config.apiKey || !config.projectId) {
-        updateFirebaseStatusUI(false);
-        return false;
-      }
-
-      try {
-        if (!firebase.apps.length) {
-          fbApp = firebase.initializeApp(config);
-        } else {
-          fbApp = firebase.app();
-        }
-        fbAuth = firebase.auth();
-        fbDb = firebase.firestore();
-
-        AppState.firebaseConfig = config;
-        AppState.isFirebaseConnected = true;
-        saveToStorage();
-        updateFirebaseStatusUI(true);
-
-        // Listen for Auth changes
-        fbAuth.onAuthStateChanged(async (user) => {
-          const labelUser = document.getElementById('label-cloud-user');
-          const banner = document.getElementById('auth-current-user-banner');
-          const emailEl = document.getElementById('auth-current-user-email');
-          const roleEl = document.getElementById('auth-current-user-role');
-
-          if (user) {
-            let role = 'crew';
-            let workerName = user.displayName || user.email.split('@')[0];
-            try {
-              const doc = await fbDb.collection('users').doc(user.uid).get();
-              if (doc.exists) {
-                const uData = doc.data();
-                role = uData.role || 'crew';
-                if (uData.name) workerName = uData.name;
-              }
-            } catch (e) {
-              console.warn('Error reading user profile:', e);
-            }
-
-            AppState.currentUser = { uid: user.uid, email: user.email, name: workerName, role };
-            if (labelUser) labelUser.textContent = `${workerName} (${role === 'manager' ? 'Admin' : 'Crew'})`;
-            if (banner) banner.classList.remove('hidden');
-            if (emailEl) emailEl.textContent = user.email;
-            if (roleEl) roleEl.textContent = `Role: ${role === 'manager' ? 'Manager / Admin' : 'Field Worker'}`;
-
-            if (role === 'crew') {
-              setAppMode('crew');
-              const matchedWorker = AppState.workers.find(w => w.name.toLowerCase() === workerName.toLowerCase());
-              if (matchedWorker) {
-                AppState.activeWorkerId = matchedWorker.id;
-                renderCrewPortal();
-              }
-            }
-          } else {
-            AppState.currentUser = null;
-            if (labelUser) labelUser.textContent = 'Sign In';
-            if (banner) banner.classList.add('hidden');
-          }
-        });
-
-        // Listen for Real-Time Firestore Jobs sync
-        fbDb.collection('jobs').onSnapshot((snapshot) => {
-          if (snapshot.empty && AppState.savedJobs.length > 0) return;
-          const remoteJobs = [];
-          snapshot.forEach(doc => {
-            remoteJobs.push({ ...doc.data(), id: doc.id });
-          });
-          if (remoteJobs.length > 0) {
-            isRemoteSyncInProgress = true;
-            AppState.savedJobs = remoteJobs;
-            if (!AppState.savedJobs.some(j => j.id === AppState.currentJobId)) {
-              AppState.currentJobId = AppState.savedJobs[0].id;
-            }
-            const active = AppState.savedJobs.find(j => j.id === AppState.currentJobId);
-            if (active) {
-              AppState.client = { ...active.client };
-              AppState.invoiceMeta = { ...active.invoiceMeta };
-              AppState.laborEntries = active.laborEntries || [];
-              AppState.materials = active.materials || [];
-            }
-            saveToStorage();
-            renderJobSwitcher();
-            renderCrmPipeline();
-            renderCrewPortal();
-            updateDashboardMetrics();
-            renderLaborList();
-            renderMaterialsList();
-            isRemoteSyncInProgress = false;
-          }
-        }, (err) => {
-          console.warn('Firestore snapshot error:', err);
-        });
-
-        return true;
-      } catch (err) {
-        console.error('Firebase init error:', err);
-        updateFirebaseStatusUI(false);
-        return false;
-      }
-    }
-
-    // Update Connection Badge UI
-    function updateFirebaseStatusUI(isConnected) {
-      const pill = document.getElementById('firebase-status-pill');
-      if (!pill) return;
-      if (isConnected) {
-        pill.innerHTML = `
-          <span class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-xs">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping mr-1"></span>
-            <span>Cloud Sync Active (Firestore)</span>
-          </span>
-        `;
-      } else {
-        pill.innerHTML = `
-          <span class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
-            <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
-            <span>Local Offline Mode</span>
-          </span>
-        `;
-      }
-    }
-
-    // Push local data up to Firebase Firestore
-    async function uploadAllDataToFirebase() {
-      if (!fbDb) {
-        showToast('Please connect to Firebase first', 'error');
-        return;
-      }
-      showToast('Uploading local database to Firebase...', 'info');
-      try {
-        const batch = fbDb.batch();
-        (AppState.savedJobs || []).forEach(job => {
-          const docRef = fbDb.collection('jobs').doc(job.id);
-          batch.set(docRef, JSON.parse(JSON.stringify(job)), { merge: true });
-        });
-
-        (AppState.workers || []).forEach(w => {
-          const wRef = fbDb.collection('workers').doc(w.id);
-          batch.set(wRef, JSON.parse(JSON.stringify(w)), { merge: true });
-        });
-
-        await batch.commit();
-        showToast('All local jobs and workers uploaded to cloud!', 'success');
-      } catch (err) {
-        console.error('Upload error:', err);
-        showToast(`Upload failed: ${err.message}`, 'error');
-      }
-    }
-
-    // Sync a single job to Firebase
-    function syncJobToFirebase(jobData) {
-      if (!fbDb || !jobData || isRemoteSyncInProgress) return;
-      try {
-        fbDb.collection('jobs').doc(jobData.id).set(JSON.parse(JSON.stringify(jobData)), { merge: true });
-      } catch (err) {
-        console.warn('Sync job error:', err);
-      }
-    }
-
     function bindProjectFormInputs() {
-      const bind = (id, obj, prop) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.value = obj[prop] !== undefined ? obj[prop] : '';
-        el.addEventListener('input', () => {
-          obj[prop] = el.value;
-          saveToStorage();
-          updateDashboardMetrics();
-        });
-      };
-
-      bind('client-name', AppState.client, 'name');
-      bind('client-contact', AppState.client, 'contact');
-      bind('client-email', AppState.client, 'email');
-      bind('client-phone', AppState.client, 'phone');
-      bind('client-billing-address', AppState.client, 'billingAddress');
-      bind('client-job-address', AppState.client, 'jobAddress');
-      bind('project-scope', AppState.client, 'projectScope');
-
       if (!AppState.client.paintSpecs) {
         AppState.client.paintSpecs = {
           wallColor: 'SW 7029 Agreeable Gray (Eggshell)',
@@ -6249,68 +6028,127 @@ function openRatesModal() {
           notes: ''
         };
       }
-      bind('job-spec-walls', AppState.client.paintSpecs, 'wallColor');
-      bind('job-spec-trim', AppState.client.paintSpecs, 'trimColor');
-      bind('job-spec-ceilings', AppState.client.paintSpecs, 'ceilingColor');
-      bind('job-spec-primer', AppState.client.paintSpecs, 'primer');
-      bind('job-spec-notes', AppState.client.paintSpecs, 'notes');
+
+      const bindDynamic = (id, getter, setter, refreshJobList = false) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const val = getter();
+        el.value = val !== undefined && val !== null ? val : '';
+        if (!el.dataset.boundListener) {
+          el.dataset.boundListener = 'true';
+          el.addEventListener('input', () => {
+            setter(el.value);
+            saveToStorage();
+            updateDashboardMetrics();
+            if (refreshJobList) {
+              renderJobSwitcher();
+              renderCrmPipeline();
+            }
+          });
+        }
+      };
+
+      bindDynamic('client-name', () => AppState.client.name, v => { AppState.client.name = v; }, true);
+      bindDynamic('client-contact', () => AppState.client.contact, v => { AppState.client.contact = v; }, true);
+      bindDynamic('client-email', () => AppState.client.email, v => { AppState.client.email = v; }, true);
+      bindDynamic('client-phone', () => AppState.client.phone, v => { AppState.client.phone = v; }, true);
+      bindDynamic('client-billing-address', () => AppState.client.billingAddress, v => { AppState.client.billingAddress = v; }, false);
+      bindDynamic('client-job-address', () => AppState.client.jobAddress, v => { AppState.client.jobAddress = v; }, true);
+      bindDynamic('project-scope', () => AppState.client.projectScope, v => { AppState.client.projectScope = v; }, true);
+
+      bindDynamic('job-spec-walls', () => AppState.client.paintSpecs?.wallColor, v => { if (!AppState.client.paintSpecs) AppState.client.paintSpecs = {}; AppState.client.paintSpecs.wallColor = v; }, true);
+      bindDynamic('job-spec-trim', () => AppState.client.paintSpecs?.trimColor, v => { if (!AppState.client.paintSpecs) AppState.client.paintSpecs = {}; AppState.client.paintSpecs.trimColor = v; }, true);
+      bindDynamic('job-spec-ceilings', () => AppState.client.paintSpecs?.ceilingColor, v => { if (!AppState.client.paintSpecs) AppState.client.paintSpecs = {}; AppState.client.paintSpecs.ceilingColor = v; }, true);
+      bindDynamic('job-spec-primer', () => AppState.client.paintSpecs?.primer, v => { if (!AppState.client.paintSpecs) AppState.client.paintSpecs = {}; AppState.client.paintSpecs.primer = v; }, true);
+      bindDynamic('job-spec-notes', () => AppState.client.paintSpecs?.notes, v => { if (!AppState.client.paintSpecs) AppState.client.paintSpecs = {}; AppState.client.paintSpecs.notes = v; }, true);
 
       const pinInput = document.getElementById('setting-manager-pin');
       if (pinInput) pinInput.value = AppState.managerPin || '1234';
 
-      bind('contractor-name', AppState.contractor, 'name');
-      bind('contractor-phone', AppState.contractor, 'phone');
-      bind('contractor-email', AppState.contractor, 'email');
-      bind('contractor-address', AppState.contractor, 'address');
-      bind('contractor-tagline', AppState.contractor, 'tagline');
-      bind('contractor-venmo', AppState.contractor, 'venmo');
-      bind('contractor-zelle', AppState.contractor, 'zelle');
+      bindDynamic('contractor-name', () => AppState.contractor.name, v => { AppState.contractor.name = v; });
+      bindDynamic('contractor-phone', () => AppState.contractor.phone, v => { AppState.contractor.phone = v; });
+      bindDynamic('contractor-email', () => AppState.contractor.email, v => { AppState.contractor.email = v; });
+      bindDynamic('contractor-address', () => AppState.contractor.address, v => { AppState.contractor.address = v; });
+      bindDynamic('contractor-tagline', () => AppState.contractor.tagline, v => { AppState.contractor.tagline = v; });
+      bindDynamic('contractor-venmo', () => AppState.contractor.venmo, v => { AppState.contractor.venmo = v; });
+      bindDynamic('contractor-zelle', () => AppState.contractor.zelle, v => { AppState.contractor.zelle = v; });
 
-      bind('inv-number', AppState.invoiceMeta, 'number');
-      bind('inv-date', AppState.invoiceMeta, 'date');
-      bind('inv-due-date', AppState.invoiceMeta, 'dueDate');
-      bind('inv-terms', AppState.invoiceMeta, 'terms');
-      bind('inv-tax-rate', AppState.invoiceMeta, 'taxRate');
-      bind('inv-retainage-rate', AppState.invoiceMeta, 'retainageRate');
-      bind('inv-blended-rate', AppState.invoiceMeta, 'blendedRate');
-      bind('inv-deposit', AppState.invoiceMeta, 'deposit');
-      bind('inv-payment-notes', AppState.invoiceMeta, 'paymentNotes');
+      bindDynamic('inv-number', () => AppState.invoiceMeta.number, v => { AppState.invoiceMeta.number = v; }, true);
+      bindDynamic('inv-date', () => AppState.invoiceMeta.date, v => { AppState.invoiceMeta.date = v; }, true);
+      bindDynamic('inv-due-date', () => AppState.invoiceMeta.dueDate, v => { AppState.invoiceMeta.dueDate = v; });
+      bindDynamic('inv-terms', () => AppState.invoiceMeta.terms, v => { AppState.invoiceMeta.terms = v; });
+      bindDynamic('inv-tax-rate', () => AppState.invoiceMeta.taxRate, v => { AppState.invoiceMeta.taxRate = v; });
+      bindDynamic('inv-retainage-rate', () => AppState.invoiceMeta.retainageRate, v => { AppState.invoiceMeta.retainageRate = v; });
+      bindDynamic('inv-blended-rate', () => AppState.invoiceMeta.blendedRate || 58, v => { AppState.invoiceMeta.blendedRate = parseFloat(v) || 58; });
+      bindDynamic('inv-deposit', () => AppState.invoiceMeta.deposit, v => { AppState.invoiceMeta.deposit = v; });
+      bindDynamic('inv-payment-notes', () => AppState.invoiceMeta.paymentNotes, v => { AppState.invoiceMeta.paymentNotes = v; });
+
+      const hideNamesEl = document.getElementById('inv-hide-worker-names');
+      if (hideNamesEl) {
+        hideNamesEl.checked = AppState.invoiceMeta.hideWorkerNames !== false;
+        if (!hideNamesEl.dataset.boundListener) {
+          hideNamesEl.dataset.boundListener = 'true';
+          hideNamesEl.addEventListener('change', () => {
+            AppState.invoiceMeta.hideWorkerNames = hideNamesEl.checked;
+            saveToStorage();
+            updateInvoicePreviewDoc();
+            showToast(hideNamesEl.checked ? 'Worker names & roles hidden on Blended Invoice' : 'Worker names & roles shown on Invoice');
+          });
+        }
+      }
 
       const waiverEl = document.getElementById('inv-lien-waiver-toggle');
       if (waiverEl) {
         waiverEl.checked = AppState.invoiceMeta.includeLienWaiver !== false;
-        waiverEl.addEventListener('change', () => {
-          AppState.invoiceMeta.includeLienWaiver = waiverEl.checked;
-          saveToStorage();
-          updateInvoicePreviewDoc();
-        });
+        if (!waiverEl.dataset.boundListener) {
+          waiverEl.dataset.boundListener = 'true';
+          waiverEl.addEventListener('change', () => {
+            AppState.invoiceMeta.includeLienWaiver = waiverEl.checked;
+            saveToStorage();
+            updateInvoicePreviewDoc();
+          });
+        }
       }
 
       document.querySelectorAll('.btn-term-preset').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const term = btn.dataset.term;
-          document.getElementById('inv-terms').value = term;
-          AppState.invoiceMeta.terms = term;
-          saveToStorage();
-          showToast(`Terms set to ${term}`);
-        });
+        if (!btn.dataset.boundListener) {
+          btn.dataset.boundListener = 'true';
+          btn.addEventListener('click', () => {
+            const term = btn.dataset.term;
+            document.getElementById('inv-terms').value = term;
+            AppState.invoiceMeta.terms = term;
+            saveToStorage();
+            showToast(`Terms set to ${term}`);
+          });
+        }
       });
 
-      document.getElementById('btn-gen-inv-num').addEventListener('click', () => {
-        const randomNum = Math.floor(100 + Math.random() * 900);
-        const newNum = `JPF-2026-${randomNum}`;
-        document.getElementById('inv-number').value = newNum;
-        AppState.invoiceMeta.number = newNum;
-        saveToStorage();
-        showToast(`Generated Invoice #${newNum}`);
-      });
+      const genNumBtn = document.getElementById('btn-gen-inv-num');
+      if (genNumBtn && !genNumBtn.dataset.boundListener) {
+        genNumBtn.dataset.boundListener = 'true';
+        genNumBtn.addEventListener('click', () => {
+          const randomNum = Math.floor(100 + Math.random() * 900);
+          const newNum = `JPF-2026-${randomNum}`;
+          document.getElementById('inv-number').value = newNum;
+          AppState.invoiceMeta.number = newNum;
+          saveToStorage();
+          renderJobSwitcher();
+          renderCrmPipeline();
+          showToast(`Generated Invoice #${newNum}`);
+        });
+      }
 
       const markupInput = document.getElementById('global-markup-pct');
-      markupInput.value = AppState.globalMarkup || 15;
-      markupInput.addEventListener('input', () => {
-        AppState.globalMarkup = Number(markupInput.value) || 0;
-        saveToStorage();
-      });
+      if (markupInput) {
+        markupInput.value = AppState.globalMarkup || 15;
+        if (!markupInput.dataset.boundListener) {
+          markupInput.dataset.boundListener = 'true';
+          markupInput.addEventListener('input', () => {
+            AppState.globalMarkup = Number(markupInput.value) || 0;
+            saveToStorage();
+          });
+        }
+      }
 
       const todayBtn = document.getElementById('btn-date-today');
       if (todayBtn) {
@@ -6587,16 +6425,28 @@ function openRatesModal() {
       document.getElementById('doc-job-address').textContent = AppState.client.jobAddress || 'Job Site Location';
       document.getElementById('doc-project-scope').textContent = AppState.client.projectScope || 'General Painting & Drywall Finishing';
 
-      // Section 1: Itemized Labor Table Header, Columns & Privacy Handling
-      const isBlended = totals.isBlended;
-      const hideWorkerNames = isBlended || (AppState.invoiceMeta.hideWorkerNames === true);
-
+      // Section 1: Itemized Labor Table (Dynamic Client Privacy when Blended Mode is active)
+      const hideNamesAndRoles = totals.isBlended && (AppState.invoiceMeta.hideWorkerNames !== false);
       const laborThead = document.getElementById('doc-labor-table-head');
-      const laborTfootLabel = document.getElementById('doc-labor-tfoot-label');
-      const laborTfootRateCol = document.getElementById('doc-labor-tfoot-rate-col');
+      const laborTfootLabelCell = document.getElementById('doc-labor-tfoot-label-cell');
+      const previewToggleBtn = document.getElementById('btn-preview-toggle-mode');
+      const previewPrivacyBadge = document.getElementById('preview-privacy-badge');
+
+      if (previewToggleBtn) {
+        if (totals.isBlended) {
+          previewToggleBtn.textContent = `Blended Rate ($${totals.blendedRate.toFixed(0)}/hr) • Switch to Tiered Role Rates`;
+          previewToggleBtn.className = 'touch-press px-2.5 py-1 rounded-lg font-bold text-xs bg-blue-600 text-white shadow-xs hover:bg-blue-700 transition';
+        } else {
+          previewToggleBtn.textContent = `Tiered Role Rates • Switch to Blended Hours ($${(AppState.invoiceMeta.blendedRate || 58)}/hr)`;
+          previewToggleBtn.className = 'touch-press px-2.5 py-1 rounded-lg font-bold text-xs bg-white text-slate-800 shadow-xs border border-slate-200 hover:bg-blue-50 transition';
+        }
+      }
+      if (previewPrivacyBadge) {
+        previewPrivacyBadge.classList.toggle('hidden', !hideNamesAndRoles);
+      }
 
       if (laborThead) {
-        if (hideWorkerNames) {
+        if (hideNamesAndRoles) {
           laborThead.innerHTML = `
             <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold uppercase tracking-wider text-[10px]">
               <th class="py-2 px-2.5">Date</th>
@@ -6607,8 +6457,6 @@ function openRatesModal() {
               <th class="py-2 px-2.5 text-right">Total</th>
             </tr>
           `;
-          if (laborTfootLabel) laborTfootLabel.setAttribute('colspan', '3');
-          if (laborTfootRateCol) laborTfootRateCol.textContent = `$${totals.blendedRate.toFixed(2)}`;
         } else {
           laborThead.innerHTML = `
             <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold uppercase tracking-wider text-[10px]">
@@ -6621,14 +6469,15 @@ function openRatesModal() {
               <th class="py-2 px-2.5 text-right">Total</th>
             </tr>
           `;
-          if (laborTfootLabel) laborTfootLabel.setAttribute('colspan', '4');
-          if (laborTfootRateCol) laborTfootRateCol.textContent = '—';
         }
+      }
+      if (laborTfootLabelCell) {
+        laborTfootLabelCell.setAttribute('colspan', hideNamesAndRoles ? '3' : '4');
       }
 
       const laborTbody = document.getElementById('doc-labor-table-body');
+      const colCount = hideNamesAndRoles ? 6 : 7;
       if (AppState.laborEntries.length === 0) {
-        const colCount = hideWorkerNames ? 6 : 7;
         laborTbody.innerHTML = `<tr><td colspan="${colCount}" class="py-4 text-center text-slate-400 italic">No labor entries recorded on this invoice.</td></tr>`;
       } else {
         const sorted = [...AppState.laborEntries].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
@@ -6639,27 +6488,27 @@ function openRatesModal() {
           const effectiveRate = totals.isBlended ? totals.blendedRate : roleRate;
           const lineTotal = hrs * effectiveRate;
 
-          if (hideWorkerNames) {
-            // Omit worker names and roles completely for privacy
+          if (hideNamesAndRoles) {
             lHtml += `
               <tr class="hover:bg-slate-50 text-[11px]">
                 <td class="py-2 px-2.5 font-medium text-slate-700 whitespace-nowrap">${fmtDateDisplay(entry.date)}</td>
                 <td class="py-2 px-2.5 text-slate-800 font-medium">
-                  <span>${entry.task || 'Professional Surface Preparation & Painting'}</span>
+                  <span>${entry.task || 'Professional painting & surface preparation'}</span>
                 </td>
-                <td class="py-2 px-2.5">
-                  ${entry.phase && entry.phase !== 'Base Scope' ? `<span class="inline-block px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-100 text-amber-900 border border-amber-300">${entry.phase}</span>` : '<span class="text-slate-500 text-[10px]">Base Scope</span>'}
+                <td class="py-2 px-2.5 text-slate-600">
+                  <span class="inline-block px-2 py-0.5 rounded text-[9.5px] font-semibold ${entry.phase && entry.phase !== 'Base Scope' ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-slate-100 text-slate-700 border border-slate-200'}">${entry.phase || 'Base Scope'}</span>
                 </td>
-                <td class="py-2 px-2 text-right font-mono font-bold">${hrs.toFixed(1)}</td>
-                <td class="py-2 px-2.5 text-right font-mono text-slate-600">
-                  $${effectiveRate.toFixed(2)}
-                  <span class="block text-[8px] text-blue-600 font-semibold uppercase">Blended</span>
+                <td class="py-2 px-2 text-right font-mono font-bold text-slate-900">
+                  ${hrs.toFixed(1)} hrs
+                  ${entry.startTime && entry.endTime ? `<span class="block text-[9px] text-slate-400 font-normal">${formatTime12h(entry.startTime)}–${formatTime12h(entry.endTime)}</span>` : ''}
+                </td>
+                <td class="py-2 px-2.5 text-right font-mono text-slate-700">
+                  $${effectiveRate.toFixed(2)}/hr
                 </td>
                 <td class="py-2 px-2.5 text-right font-mono font-bold text-slate-900">${fmtCurr(lineTotal)}</td>
               </tr>
             `;
           } else {
-            // Tiered role mode with worker names and role badges
             lHtml += `
               <tr class="hover:bg-slate-50 text-[11px]">
                 <td class="py-2 px-2.5 font-medium text-slate-700 whitespace-nowrap">${fmtDateDisplay(entry.date)}</td>
@@ -6675,6 +6524,7 @@ function openRatesModal() {
                 </td>
                 <td class="py-2 px-2.5 text-right font-mono text-slate-600">
                   $${effectiveRate.toFixed(2)}
+                  ${totals.isBlended ? '<span class="block text-[8px] text-blue-600 font-semibold uppercase">Blended</span>' : ''}
                 </td>
                 <td class="py-2 px-2.5 text-right font-mono font-bold text-slate-900">${fmtCurr(lineTotal)}</td>
               </tr>
@@ -6684,12 +6534,12 @@ function openRatesModal() {
         laborTbody.innerHTML = lHtml;
       }
 
-      document.getElementById('doc-labor-meta').textContent = `${totals.totalLaborHours.toFixed(1)} Total Hours`;
+      document.getElementById('doc-labor-meta').textContent = `${totals.totalLaborHours.toFixed(1)} Total Working Man-Hours`;
       document.getElementById('doc-labor-total-hours').textContent = totals.totalLaborHours.toFixed(1);
       document.getElementById('doc-labor-subtotal').textContent = fmtCurr(totals.totalLaborCost);
 
-      if (hideWorkerNames) {
-        document.getElementById('doc-labor-role-summary').textContent = `Total Labor: ${totals.totalLaborHours.toFixed(1)} Man-Hours @ Flat Blended Rate ($${totals.blendedRate.toFixed(2)}/hr)`;
+      if (totals.isBlended) {
+        document.getElementById('doc-labor-role-summary').textContent = `${totals.totalLaborHours.toFixed(1)} Working Man-Hours @ $${totals.blendedRate.toFixed(2)}/hr Set Blended Rate`;
       } else {
         let roleBreakdown = [];
         if (totals.roleHours.Helper > 0) roleBreakdown.push(`Helper: ${totals.roleHours.Helper.toFixed(1)}h @ $${AppState.rates.Helper}`);
@@ -6698,16 +6548,6 @@ function openRatesModal() {
         if (totals.roleHours['Lead / Foreman'] > 0) roleBreakdown.push(`Lead: ${totals.roleHours['Lead / Foreman'].toFixed(1)}h @ $${AppState.rates['Lead / Foreman']}`);
         if (totals.roleHours['Master Painter'] > 0) roleBreakdown.push(`Master: ${totals.roleHours['Master Painter'].toFixed(1)}h @ $${AppState.rates['Master Painter']}`);
         document.getElementById('doc-labor-role-summary').textContent = roleBreakdown.join(' | ') || '0.0 hrs';
-      }
-
-      // Update Toolbar toggle button label in Tab 4
-      const previewModeBtnText = document.getElementById('btn-preview-mode-text');
-      if (previewModeBtnText) {
-        if (totals.isBlended) {
-          previewModeBtnText.textContent = `Blended Rate ($${totals.blendedRate.toFixed(2)}/hr) • Names Omitted`;
-        } else {
-          previewModeBtnText.textContent = `Tiered Role Rates • ${AppState.invoiceMeta.hideWorkerNames ? 'Names Omitted' : 'Names Shown'}`;
-        }
       }
 
       // Section 2: Itemized Materials Table
@@ -6893,39 +6733,40 @@ function openRatesModal() {
       rows.push(['Project Scope', AppState.client.projectScope]);
       rows.push([]);
 
-      const hideNamesInExport = totals.isBlended || AppState.invoiceMeta.hideWorkerNames;
-      if (hideNamesInExport) {
-        rows.push(['SECTION 1: ITEMIZED LABOR & CREW TIME (BLENDED WORKING MAN-HOURS)']);
-        rows.push(['Date', 'Work Performed / Service Description', 'Scope / Phase', 'Crew Hours', 'Blended Rate ($/hr)', 'Total ($)']);
+      const hideNamesCsv = totals.isBlended && (AppState.invoiceMeta.hideWorkerNames !== false);
+      rows.push(['SECTION 1: ITEMIZED LABOR & CREW TIME']);
+      if (hideNamesCsv) {
+        rows.push(['Date', 'Work Performed / Description', 'Phase / Scope', 'Working Man-Hours', 'Blended Rate ($/hr)', 'Total', 'Start Time', 'End Time']);
+        AppState.laborEntries.forEach(e => {
+          const hrs = Number(e.hours) || 0;
+          const rate = totals.blendedRate;
+          rows.push([
+            e.date || '',
+            e.task || 'Professional painting & finishing',
+            e.phase || 'Base Scope',
+            hrs.toFixed(2),
+            rate.toFixed(2),
+            (hrs * rate).toFixed(2),
+            e.startTime || '',
+            e.endTime || ''
+          ]);
+        });
+      } else {
+        rows.push(['Date', 'Worker', 'Role', 'Hours', 'Rate', 'Total', 'Phase / Scope', 'Start Time', 'End Time', 'Break (mins)', 'Task / Description']);
         AppState.laborEntries.forEach(e => {
           const hrs = Number(e.hours) || 0;
           const rate = totals.isBlended ? totals.blendedRate : (Number(e.rate) || 0);
           rows.push([
-            e.date,
-            e.task || 'Professional Surface Preparation & Painting',
-            e.phase || 'Base Scope',
-            hrs.toFixed(1),
-            rate.toFixed(2),
-            (hrs * rate).toFixed(2)
-          ]);
-        });
-      } else {
-        rows.push(['SECTION 1: ITEMIZED LABOR & CREW TIME']);
-        rows.push(['Date', 'Worker', 'Role', 'Hours', 'Rate', 'Total', 'Phase / Scope', 'Start Time', 'End Time', 'Break (mins)', 'Task / Description']);
-        AppState.laborEntries.forEach(e => {
-          const hrs = Number(e.hours) || 0;
-          const rate = Number(e.rate) || 0;
-          rows.push([
-            e.date,
-            e.worker,
-            e.role,
-            hrs.toFixed(1),
+            e.date || '',
+            e.worker || '',
+            e.role || '',
+            hrs.toFixed(2),
             rate.toFixed(2),
             (hrs * rate).toFixed(2),
             e.phase || 'Base Scope',
             e.startTime || '',
             e.endTime || '',
-            e.breakMins || 0,
+            e.breakMins !== undefined ? e.breakMins : '',
             e.task || ''
           ]);
         });
@@ -7043,164 +6884,6 @@ Thank you for your business!`;
 
     // Initialize Event Listeners
     function setupEventListeners() {
-
-      // Firebase Cloud Sync Setup Listeners
-      const btnToggleManualFb = document.getElementById('btn-toggle-manual-fb-fields');
-      const fbManualFields = document.getElementById('firebase-manual-fields');
-      if (btnToggleManualFb && fbManualFields) {
-        btnToggleManualFb.addEventListener('click', () => {
-          fbManualFields.classList.toggle('hidden');
-          btnToggleManualFb.textContent = fbManualFields.classList.contains('hidden') ? 'Manual Fields →' : 'Hide Manual Fields';
-        });
-      }
-
-      const btnConnectFb = document.getElementById('btn-connect-firebase');
-      if (btnConnectFb) {
-        btnConnectFb.addEventListener('click', () => {
-          const rawText = document.getElementById('firebase-raw-config')?.value.trim();
-          let config = parseFirebaseConfigSnippet(rawText);
-
-          if (!config) {
-            config = {
-              apiKey: document.getElementById('fb-field-apiKey')?.value.trim(),
-              authDomain: document.getElementById('fb-field-authDomain')?.value.trim(),
-              projectId: document.getElementById('fb-field-projectId')?.value.trim(),
-              storageBucket: document.getElementById('fb-field-storageBucket')?.value.trim(),
-              messagingSenderId: document.getElementById('fb-field-messagingSenderId')?.value.trim(),
-              appId: document.getElementById('fb-field-appId')?.value.trim()
-            };
-          }
-
-          if (!config.apiKey || !config.projectId) {
-            showToast('Please paste your Firebase configuration code or fill in apiKey & projectId', 'error');
-            return;
-          }
-
-          // Populate fields
-          document.getElementById('fb-field-apiKey').value = config.apiKey || '';
-          document.getElementById('fb-field-authDomain').value = config.authDomain || '';
-          document.getElementById('fb-field-projectId').value = config.projectId || '';
-          document.getElementById('fb-field-storageBucket').value = config.storageBucket || '';
-          document.getElementById('fb-field-messagingSenderId').value = config.messagingSenderId || '';
-          document.getElementById('fb-field-appId').value = config.appId || '';
-
-          const success = initFirebase(config);
-          if (success) {
-            showToast('Connected to Firebase! Cloud real-time sync active.', 'success');
-          } else {
-            showToast('Could not initialize Firebase with provided keys', 'error');
-          }
-        });
-      }
-
-      const btnSyncCloud = document.getElementById('btn-sync-to-cloud');
-      if (btnSyncCloud) {
-        btnSyncCloud.addEventListener('click', uploadAllDataToFirebase);
-      }
-
-      const btnDisconnectFb = document.getElementById('btn-disconnect-firebase');
-      if (btnDisconnectFb) {
-        btnDisconnectFb.addEventListener('click', () => {
-          AppState.firebaseConfig = null;
-          AppState.isFirebaseConnected = false;
-          fbDb = null;
-          fbAuth = null;
-          fbApp = null;
-          saveToStorage();
-          updateFirebaseStatusUI(false);
-          document.getElementById('firebase-raw-config').value = '';
-          showToast('Disconnected from Firebase. Working in local offline mode.');
-        });
-      }
-
-      // User Account Modal & Auth Form Listeners
-      const btnOpenAuth = document.getElementById('btn-open-cloud-auth');
-      const authModal = document.getElementById('modal-firebase-auth');
-      if (btnOpenAuth && authModal) {
-        btnOpenAuth.addEventListener('click', () => {
-          authModal.classList.remove('hidden');
-        });
-      }
-
-      const tabSignIn = document.getElementById('tab-auth-signin');
-      const tabSignUp = document.getElementById('tab-auth-signup');
-      const formSignIn = document.getElementById('form-auth-signin');
-      const formSignUp = document.getElementById('form-auth-signup');
-
-      if (tabSignIn && tabSignUp && formSignIn && formSignUp) {
-        tabSignIn.addEventListener('click', () => {
-          tabSignIn.className = 'py-2 rounded-lg bg-white text-slate-900 shadow-xs transition';
-          tabSignUp.className = 'py-2 rounded-lg text-slate-500 hover:text-slate-800 transition';
-          formSignIn.classList.remove('hidden');
-          formSignUp.classList.add('hidden');
-        });
-
-        tabSignUp.addEventListener('click', () => {
-          tabSignUp.className = 'py-2 rounded-lg bg-white text-slate-900 shadow-xs transition';
-          tabSignIn.className = 'py-2 rounded-lg text-slate-500 hover:text-slate-800 transition';
-          formSignUp.classList.remove('hidden');
-          formSignIn.classList.add('hidden');
-        });
-      }
-
-      if (formSignIn) {
-        formSignIn.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          if (!fbAuth) {
-            showToast('Connect Firebase in Job Settings before signing in', 'error');
-            return;
-          }
-          const email = document.getElementById('signin-email').value.trim();
-          const pass = document.getElementById('signin-password').value;
-          try {
-            await fbAuth.signInWithEmailAndPassword(email, pass);
-            authModal.classList.add('hidden');
-            showToast(`Signed in successfully!`, 'success');
-          } catch (err) {
-            showToast(`Sign in error: ${err.message}`, 'error');
-          }
-        });
-      }
-
-      if (formSignUp) {
-        formSignUp.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          if (!fbAuth || !fbDb) {
-            showToast('Connect Firebase in Job Settings before creating accounts', 'error');
-            return;
-          }
-          const workerName = document.getElementById('signup-worker-select').value;
-          const role = document.getElementById('signup-role-select').value;
-          const email = document.getElementById('signup-email').value.trim();
-          const pass = document.getElementById('signup-password').value;
-
-          try {
-            const userCred = await fbAuth.createUserWithEmailAndPassword(email, pass);
-            await userCred.user.updateProfile({ displayName: workerName });
-            await fbDb.collection('users').doc(userCred.user.uid).set({
-              name: workerName,
-              email: email,
-              role: role,
-              createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-
-            authModal.classList.add('hidden');
-            showToast(`Account created for ${workerName} (${role})!`, 'success');
-          } catch (err) {
-            showToast(`Account creation error: ${err.message}`, 'error');
-          }
-        });
-      }
-
-      const btnSignOut = document.getElementById('btn-auth-signout');
-      if (btnSignOut) {
-        btnSignOut.addEventListener('click', async () => {
-          if (fbAuth) {
-            await fbAuth.signOut();
-            showToast('Signed out of account');
-          }
-        });
-      }
 
       const formLabor = document.getElementById('form-labor');
       formLabor.addEventListener('submit', (e) => {
@@ -7602,8 +7285,9 @@ Thank you for your business!`;
           () => {
             const sample = getSampleData();
             Object.assign(AppState, sample);
+            AppState.savedJobs = [];
+            initSavedJobs(true);
             saveToStorage();
-            initSavedJobs();
             bindProjectFormInputs();
             updateDashboardMetrics();
             renderLaborList();
@@ -7712,37 +7396,11 @@ Thank you for your business!`;
 
       function setLaborBillingMode(mode) {
         AppState.invoiceMeta.laborBillingMode = mode;
-        if (mode === 'blended') {
-          AppState.invoiceMeta.hideWorkerNames = true;
-          const chkHide = document.getElementById('inv-hide-worker-names');
-          if (chkHide) chkHide.checked = true;
-        }
         saveToStorage();
         updateDashboardMetrics();
         renderLaborList();
         updateInvoicePreviewDoc();
-        showToast(mode === 'blended' ? `Switched to Blended Crew Rate ($${(AppState.invoiceMeta.blendedRate || 58)}/hr) • Worker names omitted` : 'Switched to Tiered Role Rates');
-      }
-
-      // Checkbox listener for Worker Privacy
-      const chkHideNames = document.getElementById('inv-hide-worker-names');
-      if (chkHideNames) {
-        chkHideNames.checked = (AppState.invoiceMeta.hideWorkerNames !== false);
-        chkHideNames.addEventListener('change', (e) => {
-          AppState.invoiceMeta.hideWorkerNames = e.target.checked;
-          saveToStorage();
-          updateInvoicePreviewDoc();
-          showToast(e.target.checked ? 'Client Privacy: Worker names & roles omitted on invoices' : 'Worker names & roles visible on invoices');
-        });
-      }
-
-      // Quick Preview Mode Toggle in Tab 4
-      const btnPreviewToggle = document.getElementById('btn-preview-toggle-mode');
-      if (btnPreviewToggle) {
-        btnPreviewToggle.addEventListener('click', () => {
-          const nextMode = AppState.invoiceMeta.laborBillingMode === 'blended' ? 'role' : 'blended';
-          setLaborBillingMode(nextMode);
-        });
+        showToast(mode === 'blended' ? `Switched to Blended Crew Rate ($${(AppState.invoiceMeta.blendedRate || 58)}/hr)` : 'Switched to Tiered Role Rates');
       }
 
       if (btnModeRole) {
@@ -7880,13 +7538,26 @@ Thank you for your business!`;
             laborEntries: [],
             materials: []
           };
-          AppState.savedJobs.push(newJob);
-          showToast(`Added ${clientName} to pipeline!`);
+          AppState.savedJobs.unshift(newJob);
+          // Also switch active job to the newly created client so their invoice is ready immediately
+          AppState.currentJobId = newId;
+          AppState.client = JSON.parse(JSON.stringify(newJob.client));
+          AppState.invoiceMeta = JSON.parse(JSON.stringify(newJob.invoiceMeta));
+          AppState.laborEntries = [];
+          AppState.materials = [];
+          showToast(`Added & activated client "${clientName}"!`);
         }
 
         saveToStorage();
+        bindProjectFormInputs();
+        updateDashboardMetrics();
+        renderLaborList();
+        renderMaterialsList();
+        renderCrewPayrollSummary();
+        updateInvoicePreviewDoc();
         renderCrmPipeline();
         renderJobSwitcher();
+        renderCrewPortal();
         document.getElementById('modal-crm-lead')?.classList.add('hidden');
       });
 
@@ -8039,9 +7710,158 @@ Thank you for your business!`;
         showToast(`Logged past shift: ${calc.netHours} hrs for ${activeWorker.name}`, 'success');
       });
 
-      // View active invoice from CRM banner
+      // View active invoice from CRM banner -> Open Live Invoice PDF Tab
       document.getElementById('btn-crm-view-active-invoice')?.addEventListener('click', () => {
-        switchTab('labor');
+        switchTab('preview');
+      });
+
+      // Quick Billing Mode Toggle in Tab 4 Preview Toolbar
+      const btnPreviewToggleMode = document.getElementById('btn-preview-toggle-mode');
+      if (btnPreviewToggleMode) {
+        btnPreviewToggleMode.addEventListener('click', () => {
+          const nextMode = AppState.invoiceMeta.laborBillingMode === 'blended' ? 'role' : 'blended';
+          setLaborBillingMode(nextMode);
+        });
+      }
+
+      // Open Save & Backup Modal
+      const openSaveBackupModal = () => {
+        saveToStorage();
+        updateAutoSaveIndicator();
+        document.getElementById('modal-save-backup')?.classList.remove('hidden');
+      };
+      document.getElementById('btn-open-save-backup')?.addEventListener('click', openSaveBackupModal);
+      document.getElementById('btn-crm-open-backup')?.addEventListener('click', openSaveBackupModal);
+
+      // Download Standalone HTML App With Current Data Baked In
+      document.getElementById('btn-download-baked-html')?.addEventListener('click', () => {
+        try {
+          saveToStorage();
+          const stateJson = JSON.stringify(AppState).replace(/<\/script/gi, '<\\/script');
+          let docHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+          const bakedRegex = /<script id="jpf-baked-state">[\s\S]*?<\/script>/i;
+          const newBakedScript = `<script id="jpf-baked-state">window.__JPF_BAKED_STATE__ = ${stateJson};<\/script>`;
+          if (bakedRegex.test(docHtml)) {
+            docHtml = docHtml.replace(bakedRegex, newBakedScript);
+          } else {
+            docHtml = docHtml.replace('</head>', newBakedScript + '\n</head>');
+          }
+          const blob = new Blob([docHtml], { type: 'text/html;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          const dateStr = new Date().toISOString().split('T')[0];
+          a.href = url;
+          a.download = `juniors-pro-finish-crm-saved-${dateStr}.html`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showToast('Downloaded app with all your clients & changes saved inside!', 'success');
+        } catch (err) {
+          console.error('Error baking HTML:', err);
+          showToast('Could not generate HTML file', 'error');
+        }
+      });
+
+      // Export JSON Backup
+      document.getElementById('btn-export-json-backup')?.addEventListener('click', () => {
+        saveToStorage();
+        const blob = new Blob([JSON.stringify(AppState, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const dateStr = new Date().toISOString().split('T')[0];
+        a.href = url;
+        a.download = `juniors-pro-finish-backup-${dateStr}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Exported JSON backup file!', 'success');
+      });
+
+      // Import / Restore JSON Backup
+      document.getElementById('input-import-json-backup')?.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const imported = JSON.parse(ev.target.result);
+            if (!imported || typeof imported !== 'object') throw new Error('Invalid JSON');
+            Object.assign(AppState, imported);
+            saveToStorage();
+            bindProjectFormInputs();
+            updateDashboardMetrics();
+            renderLaborList();
+            renderMaterialsList();
+            renderCrewPayrollSummary();
+            renderCrmPipeline();
+            renderJobSwitcher();
+            renderCrewPortal();
+            updateInvoicePreviewDoc();
+            renderCompanyLogo();
+            renderQRCodeSVG();
+            document.getElementById('modal-save-backup')?.classList.add('hidden');
+            showToast('Restored all clients, jobs & settings from backup!', 'success');
+          } catch (err) {
+            showToast('Invalid backup file format', 'error');
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      // Clear Demo Clients & Start Fresh
+      document.getElementById('btn-clear-demo-clients')?.addEventListener('click', () => {
+        openConfirmModal(
+          'Clear Sample Demo Clients?',
+          'This removes the 5 sample demo jobs and gives you a clean slate for your own real clients. Your crew roster, rates, and logo will be kept.',
+          () => {
+            const newId = 'job-' + Date.now().toString(36);
+            const today = new Date().toISOString().split('T')[0];
+            const due = new Date(Date.now() + 15 * 86400000).toISOString().split('T')[0];
+            const freshJob = {
+              id: newId,
+              title: 'My First Client Project (JPF-2026-101)',
+              number: 'JPF-2026-101',
+              status: 'active',
+              estimateAmount: 0,
+              date: today,
+              client: {
+                name: 'My First Client Project',
+                contact: '',
+                email: '',
+                phone: '',
+                billingAddress: '',
+                jobAddress: '',
+                projectScope: '',
+                paintSpecs: { wallColor: '', trimColor: '', ceilingColor: '', primer: '', notes: '' }
+              },
+              paintSpecs: { wallColor: '', trimColor: '', ceilingColor: '', primer: '', notes: '' },
+              invoiceMeta: {
+                number: 'JPF-2026-101',
+                date: today,
+                dueDate: due,
+                terms: 'Net 15 Days',
+                taxRate: 0.00,
+                retainageRate: 0.00,
+                laborBillingMode: AppState.invoiceMeta?.laborBillingMode || 'blended',
+                blendedRate: AppState.invoiceMeta?.blendedRate || 58,
+                hideWorkerNames: true,
+                includeLienWaiver: true,
+                deposit: 0.00,
+                paymentNotes: AppState.invoiceMeta?.paymentNotes || "Remit check payments to: Junior's Pro Finish LLC, Toledo IA."
+              },
+              laborEntries: [],
+              materials: []
+            };
+            AppState.savedJobs = [freshJob];
+            loadJob(newId);
+            closeConfirmModal();
+            document.getElementById('modal-save-backup')?.classList.add('hidden');
+            showToast('Cleared sample demo jobs! Ready for your clients.', 'success');
+          },
+          true
+        );
       });
 
       // Crew job switcher dropdown
@@ -8057,47 +7877,81 @@ Thank you for your business!`;
       });
     }
 
-    // App Initialization
-    window.addEventListener('DOMContentLoaded', () => {
-      initTabs();
-      
-      const loaded = loadFromStorage();
-      if (!loaded || AppState.laborEntries.length === 0) {
-        Object.assign(AppState, getSampleData());
-        saveToStorage();
-      }
-
-      initSavedJobs();
-      renderCrewSelectDatalist();
-      bindProjectFormInputs();
-      setupEventListeners();
-      updateDashboardMetrics();
-      renderLaborList();
-      renderMaterialsList();
-      renderCrewPayrollSummary();
-      renderCrmPipeline();
-      renderCrewPortal();
-      updateInvoicePreviewDoc();
-
-      // Start live clock tick interval
-      setInterval(updateLiveClockTick, 1000);
-
-      // Initialize Firebase if previously configured
-      if (AppState.firebaseConfig) {
-        initFirebase(AppState.firebaseConfig);
-        const rawArea = document.getElementById('firebase-raw-config');
-        if (rawArea) {
-          rawArea.value = JSON.stringify(AppState.firebaseConfig, null, 2);
+    // Robust App Initialization (Self-contained, pure browser local storage + IndexedDB + Baked State)
+    function startApplication() {
+      try {
+        initTabs();
+        
+        const loaded = loadFromStorage();
+        if (!loaded) {
+          Object.assign(AppState, getSampleData());
+          // Clear the 2-item sample savedJobs so initSavedJobs(true) populates all 5 sample CRM jobs on first run
+          AppState.savedJobs = [];
+          initSavedJobs(true);
+          saveToStorage();
+        } else {
+          initSavedJobs(false);
         }
-      }
 
-      // Set initial App Mode (Manager vs Crew)
-      if (AppState.mode === 'crew') {
-        setAppMode('crew');
-      } else {
-        setAppMode('manager');
+        // Also check IndexedDB if localStorage had no state (e.g. iframe reload)
+        if (!loaded && window.indexedDB) {
+          try {
+            const req = window.indexedDB.open('JuniorsProFinishDB', 1);
+            req.onsuccess = function(e) {
+              const db = e.target.result;
+              if (db.objectStoreNames.contains('app_state')) {
+                const getReq = db.transaction('app_state', 'readonly').objectStore('app_state').get('latest');
+                getReq.onsuccess = function() {
+                  if (getReq.result && getReq.result.savedJobs && getReq.result.savedJobs.length > 0) {
+                    Object.assign(AppState, getReq.result);
+                    localStorage.setItem('juniors_pro_finish_app_state', JSON.stringify(AppState));
+                    bindProjectFormInputs();
+                    updateDashboardMetrics();
+                    renderLaborList();
+                    renderMaterialsList();
+                    renderCrewPayrollSummary();
+                    renderCrmPipeline();
+                    renderJobSwitcher();
+                    renderCrewPortal();
+                    updateInvoicePreviewDoc();
+                    renderCompanyLogo();
+                    renderQRCodeSVG();
+                  }
+                };
+              }
+            };
+          } catch (e) {}
+        }
+        renderCrewSelectDatalist();
+        bindProjectFormInputs();
+        setupEventListeners();
+        updateDashboardMetrics();
+        renderLaborList();
+        renderMaterialsList();
+        renderCrewPayrollSummary();
+        renderCrmPipeline();
+        renderCrewPortal();
+        updateInvoicePreviewDoc();
+
+        // Start live clock tick interval
+        setInterval(updateLiveClockTick, 1000);
+
+        // Set initial App Mode (Manager vs Crew)
+        if (AppState.mode === 'crew') {
+          setAppMode('crew');
+        } else {
+          setAppMode('manager');
+        }
+      } catch (err) {
+        console.error('Application startup error:', err);
       }
-    });
-</script>
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startApplication);
+    } else {
+      startApplication();
+    }
+  </script>
 </body>
 </html>
